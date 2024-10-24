@@ -1,0 +1,7 @@
+development: &development
+  admin:
+    - 'xxx.com'
+  student:
+    - 'xxx.com'
+test:
+  <<: *development
