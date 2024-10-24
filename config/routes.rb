@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users,
-             controllers: { sessions: 'users/sessions',
-                            registrations: 'users/registrations',
-                            passwwords: 'users/passwords'
+             controllers: { sessions: 'students/sessions',
+                            registrations: 'students/registrations',
+                            passwwords: 'students/passwords'
              }
 
-  root "users/home#index"
+  root "students/home#index"
 end

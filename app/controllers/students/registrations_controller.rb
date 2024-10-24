@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Users::RegistrationsController < Devise::RegistrationsController
+class Students::RegistrationsController < Devise::RegistrationsController
   def create
     super
     self.resource = resource_class.new(sign_up_params)
