@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       devise_for :users,
                  controllers: { sessions: 'admin/sessions' },
                  skip: %i[registrations passwords confirmations unlocks], as: :admin
+      resources :organizations
 
       root to: "home#index", as: :admin_root
     end
