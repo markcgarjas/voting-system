@@ -5,6 +5,7 @@ Rails.application.routes.draw do
                  controllers: { sessions: 'admin/sessions' },
                  skip: %i[registrations passwords confirmations unlocks], as: :admin
       resources :organizations
+      resources :students
 
       root to: "home#index", as: :admin_root
     end
