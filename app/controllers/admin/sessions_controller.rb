@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::SessionsController < Devise::SessionsController
+  layout 'admin'
 
   def create
     user = resource_class.admin.find_by_username("admin_#{params[:admin_user][:username]}")

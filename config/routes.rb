@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   constraints(AdminDomainConstraint.new) do
-    scope module: 'admin', as: :admin do
+    scope module: 'admin' do
       devise_for :users,
                  controllers: { sessions: 'admin/sessions' },
-                 skip: %i[registrations passwords confirmations unlocks]
+                 skip: %i[registrations passwords confirmations unlocks], as: :admin
 
-      root to: "home#index"
+      root to: "home#index", as: :admin_root
     end
   end
 
@@ -17,6 +17,6 @@ Rails.application.routes.draw do
                  passwords: 'students/passwords'
                }
 
-    root to: "students/home#index"
+    root to: "students/home#index", as: :student_root
   end
 end
