@@ -6,7 +6,15 @@
         <%= link_to 'Student Lists', students_path,
                     class: "block px-4 py-2 rounded #{controller_name == 'students' ? 'bg-blue-500 text-white' : 'text-gray-700 hover:bg-gray-200'}" %>
         <%= link_to 'Student Organizations', organizations_path,
-                    class: "block px-4 py-2 text-gray-700 rounded #{controller_name == 'organizations' ? 'bg-blue-500 text-white' : 'text-gray-700 hover:bg-gray-200'}" %>
+                    class: "block px-4 py-2 rounded #{controller_name == 'organizations' ? 'bg-blue-500 text-white' : 'text-gray-700 hover:bg-gray-200'}" %>
+      </nav>
+    </div>
+
+    <div class="p-6">
+      <h2 class="text-2xl font-bold mb-5">System Role</h2>
+      <nav class="space-y-2">
+        <%= link_to 'Admin Lists', admins_path,
+                    class: "block px-4 py-2 rounded #{controller_name == 'admins' ? 'bg-blue-500 text-white' : 'text-gray-700 hover:bg-gray-200'}" %>
       </nav>
     </div>
   </aside>
