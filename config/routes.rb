@@ -4,7 +4,9 @@ Rails.application.routes.draw do
       devise_for :users,
                  controllers: { sessions: 'admin/sessions' },
                  skip: %i[registrations passwords confirmations unlocks], as: :admin
-      resources :organizations
+      resources :organizations do
+        resources :members
+      end
       resources :students
       resources :admins
 
