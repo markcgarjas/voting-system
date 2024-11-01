@@ -10,7 +10,7 @@ class Admin::AdminsController < AdminController
   end
 
   def create
-    @admin = User.new(admin_params.merge(username: "admin_#{params[:user][:username]}",
+    @admin = User.new(admin_params.merge(username: params[:user][:username],
                                          role: :admin,
                                          password: "qwer4321`"))
     if @admin.save

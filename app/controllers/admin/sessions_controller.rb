@@ -4,7 +4,7 @@ class Admin::SessionsController < Devise::SessionsController
   layout 'admin'
 
   def create
-    user = resource_class.admin.find_by_username("admin_#{params[:admin_user][:username]}")
+    user = resource_class.admin.find_by_username(params[:admin_user][:username])
     if user&.valid_password?(params[:admin_user][:password])
       sign_in :admin_user, user
       flash[:notice] = 'Sign in successfully.'
