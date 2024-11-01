@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_25_055441) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_01_080254) do
+  create_table "members", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "organization_id"
+    t.bigint "user_id"
+    t.integer "role", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_members_on_organization_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
   create_table "organizations", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "code"
