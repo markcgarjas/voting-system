@@ -29,6 +29,8 @@ gem "jbuilder"
 
 gem "devise", "~> 4.9"
 
+gem 'faker'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

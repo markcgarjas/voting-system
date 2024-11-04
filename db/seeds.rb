@@ -1,3 +1,25 @@
+admin_user = User.find_or_create_by(
+  email: 'admin1234@gmail.com',
+  username: 'admin1234')
+admin_user.password = 'qwer4321`'
+admin_user.role = :admin
+admin_user.save
+
+puts "Seeded admin user: #{admin_user.username}"
+
+40.times do
+  user = User.create(
+    email: Faker::Internet.email,
+    first_name: Faker::Name.first_name,
+    middle_name: Faker::Name.middle_name,
+    last_name: Faker::Name.last_name,
+    username: Faker::Internet.username,
+    password: 'password121'
+  )
+end
+
+puts "Seeded #{User.count} student users."
+
 organizations = [
   { name: 'University of Students Government', code: 'USG' },
   { name: 'Science and Engineering Society', code: 'SES' },
