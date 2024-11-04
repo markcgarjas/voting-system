@@ -1,11 +1,12 @@
 class Admin::MembersController < AdminController
   before_action :set_organization
+
   def new
     @member = @organization.members.new
   end
 
   def create
-    @member = @organization.members.new(user: User.find_by_username(params[:member][:username]))
+    @member = @organization.members.new(member_params)
     if @member.save
       redirect_to organizations_path, notice: 'Member created successfully.'
     else
@@ -24,5 +25,9 @@ class Admin::MembersController < AdminController
 
   def set_organization
     @organization = Organization.find(params[:organization_id])
+  end
+
+  def member_params
+    params.require(:member).permit(:name, :user_id, :officer_position_id)
   end
 end

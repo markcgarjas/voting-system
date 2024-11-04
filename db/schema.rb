@@ -10,15 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_01_080254) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_04_054811) do
   create_table "members", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "organization_id"
     t.bigint "user_id"
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "officer_position_id"
+    t.index ["officer_position_id"], name: "index_members_on_officer_position_id"
     t.index ["organization_id"], name: "index_members_on_organization_id"
     t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "officer_positions", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.integer "sort"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "organizations", charset: "utf8mb4", force: :cascade do |t|

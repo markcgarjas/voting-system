@@ -2,7 +2,7 @@ class Admin::OrganizationsController < AdminController
   before_action :set_organization, only: %i[edit update destroy]
 
   def index
-    @organizations = Organization.includes(members: :user)
+    @organizations = Organization.includes(members: %i[user officer_position])
   end
 
   def new
