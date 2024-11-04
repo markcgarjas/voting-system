@@ -4,6 +4,4 @@ class Member < ApplicationRecord
   belongs_to :officer_position
 
   enum role: { member: 0, candidate: 1 }
-
-  validates :user, uniqueness: true
 end
