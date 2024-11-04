@@ -1,5 +1,6 @@
 class Admin::MembersController < AdminController
   before_action :set_organization
+  before_action :set_member, only: %i[edit update destroy]
 
   def new
     @member = @organization.members.new
@@ -15,8 +16,18 @@ class Admin::MembersController < AdminController
     end
   end
 
+  def edit; end
+
+  def update
+    if @member.update(member_params)
+      redirect_to organizations_path, notice: 'Member updated successfully.'
+    else
+      flash.now[:alert] = @member.errors.full_messages.join(', ')
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
-    @member = @organization.members.find(params[:id])
     @member.destroy
     redirect_to organizations_path, notice: 'Member deleted successfully.'
   end
@@ -25,6 +36,10 @@ class Admin::MembersController < AdminController
 
   def set_organization
     @organization = Organization.find(params[:organization_id])
+  end
+
+  def set_member
+    @member = @organization.members.find(params[:id])
   end
 
   def member_params
