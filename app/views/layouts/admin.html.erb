@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>System Admin</title>
+    <title>
+      <%= content_title %>
+    </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,14 +13,17 @@
   </head>
 
   <body>
-    <%= render 'layouts/admin/navbar' %>
-    <%= render 'layouts/flash' %>
-
-    <div class="flex min-h-screen bg-gray-100">
+    <div class="flex h-screen bg-gray-100 font-sans">
       <%= render 'layouts/admin/sidebar' %>
-      <main class="flex-1 p-8 max-w-4xl mx-auto bg-gray-100">
-        <%= yield %>
-      </main>
+
+      <div class="flex-1 flex flex-col">
+        <%= render 'layouts/flash' %>
+        <%= render 'layouts/admin/navbar' %>
+
+        <main class="flex-1 p-6 overflow-y-auto">
+          <%= yield %>
+        </main>
+      </div>
     </div>
   </body>
 </html>

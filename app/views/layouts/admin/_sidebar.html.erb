@@ -1,42 +1,49 @@
-<% if current_admin_user %>
-  <aside class="w-64 bg-white shadow-md">
-    <div class="pt-4 px-6">
-      <div class="flex items-center justify-between cursor-pointer" onclick="toggleDropdown('students-dropdown')">
-        <h2 class="text-2xl font-bold mb-3">Students</h2>
-        <svg id="students-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06 0L10 10.92l3.71-3.71a.75.75 0 111.06 1.06l-4 4a.75.75 0 01-1.06 0l-4-4a.75.75 0 010-1.06z" clip-rule="evenodd" />
-        </svg>
+<div class="w-64 bg-gray-900 text-white flex flex-col">
+  <%= link_to admin_root_path, class: 'p-4 text-center font-bold text-lg border-b border-gray-700' do %>
+    Admin Dashboard
+  <% end %>
+
+  <nav class="flex-1 p-4 space-y-2">
+    <% if admin_user_signed_in? %>
+
+      <%= link_to 'Dashboard', admin_root_path, class: "block py-2 px-3 rounded" %>
+
+      <div class="space-y-1" data-controller="dropdown">
+        <button
+          class="w-full text-left py-2 px-3 rounded hover:bg-gray-700 flex justify-between items-center"
+          data-action="click->dropdown#toggle"
+        >
+          Student
+          <%= image_tag("dropdown.svg", alt: "Setting Icon") %>
+        </button>
+        <div data-dropdown-target="dropdown" class="space-y-1 pl-4 <%= menu_switch(:student, controller_name) %>">
+          <%= link_to 'Student Lists', students_path,
+                      class: "block py-1 px-3 rounded #{is_active('students')}" %>
+          <%= link_to 'Student Organizations', organizations_path,
+                      class: "block py-1 px-3 rounded #{is_active('organizations')}" %>
+        </div>
       </div>
-      <nav id="students-dropdown" class="space-y-2 hidden ml-4">
-        <%= link_to 'Student Lists', students_path,
-                    class: "block px-4 py-3 rounded-lg #{controller_name == 'students' ? 'bg-blue-500 text-white' : 'text-gray-700 hover:bg-gray-200'}" %>
-        <%= link_to 'Student Organizations', organizations_path,
-                    class: "block px-4 py-3 rounded-lg #{controller_name == 'organizations' ? 'bg-blue-500 text-white' : 'text-gray-700 hover:bg-gray-200'}" %>
-      </nav>
-    </div>
 
-    <div class="pt-2 px-6">
-      <div class="flex items-center justify-between cursor-pointer" onclick="toggleDropdown('system-role-dropdown')">
-        <h2 class="text-2xl font-bold mb-3">System Role</h2>
-        <!-- Dropdown icon (chevron) -->
-        <svg id="system-role-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06 0L10 10.92l3.71-3.71a.75.75 0 111.06 1.06l-4 4a.75.75 0 01-1.06 0l-4-4a.75.75 0 010-1.06z" clip-rule="evenodd" />
-        </svg>
+      <div class="space-y-1" data-controller="dropdown">
+        <button
+          class="w-full text-left py-2 px-3 rounded hover:bg-gray-700 flex justify-between items-center"
+          data-action="click->dropdown#toggle"
+        >
+          Admin
+          <%= image_tag("dropdown.svg", alt: "Setting Icon") %>
+        </button>
+        <div data-dropdown-target="dropdown" class="space-y-1 pl-4 <%= menu_switch(:admin, controller_name) %>">
+          <%= link_to 'Admin Lists', admins_path,
+                      class: "block py-1 px-3 rounded #{is_active('admins')}",
+                      onclick: "event.stopPropagation();" %>
+        </div>
       </div>
-      <nav id="system-role-dropdown" class="space-y-2 hidden ml-4">
-        <%= link_to 'Admin Lists', admins_path,
-                    class: "block px-4 py-3 rounded-lg #{controller_name == 'admins' ? 'bg-blue-500 text-white' : 'text-gray-700 hover:bg-gray-200'}" %>
-      </nav>
-    </div>
-  </aside>
-<% end %>
+    <% end %>
 
-<script>
-  function toggleDropdown(id) {
-    const dropdown = document.getElementById(id);
-    const icon = document.getElementById(id.replace('dropdown', 'icon'));
-
-    dropdown.classList.toggle('hidden');
-    icon.classList.toggle('rotate-180');
-  }
-</script>
+    <% if signed_in? %>
+      <%= link_to 'Sign Out', destroy_admin_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to logout?' }, class: 'block py-2 px-3 rounded hover:bg-gray-700' %>
+    <% else %>
+      <%= link_to 'Login', new_admin_user_session_path, class: 'block py-2 px-3 rounded hover:bg-gray-700' %>
+    <% end %>
+  </nav>
+</div>
