@@ -1,7 +1,7 @@
 module Admin::SidebarHelper
   MENU_LISTS = {
     student: %w[
-      students organizations
+      students organizations officer_positions
     ],
     admin: %w[
       admins

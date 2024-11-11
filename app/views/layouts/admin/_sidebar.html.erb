@@ -19,8 +19,10 @@
         <div data-dropdown-target="dropdown" class="space-y-1 pl-4 <%= menu_switch(:student, controller_name) %>">
           <%= link_to 'Student Lists', students_path,
                       class: "block py-1 px-3 rounded #{is_active('students')}" %>
-          <%= link_to 'Student Organizations', organizations_path,
+          <%= link_to 'Organization Lists', organizations_path,
                       class: "block py-1 px-3 rounded #{is_active('organizations')}" %>
+          <%= link_to 'Officer Position Lists', officer_positions_path,
+                      class: "block py-1 px-3 rounded #{is_active('officer_positions')}" %>
         </div>
       </div>
 
