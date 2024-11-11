@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :organizations do
         resources :members
       end
+      resources :officer_positions
       resources :students
       resources :admins
 
