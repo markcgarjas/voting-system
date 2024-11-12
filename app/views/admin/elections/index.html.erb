@@ -1,0 +1,36 @@
+<div class="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
+  <h1 class="text-2xl font-bold mb-4">Election Lists</h1>
+
+  <div class="mb-4">
+    <%= link_to 'Add Election', new_election_path, class: 'inline-block px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+  </div>
+
+  <div class="space-y-4">
+    <% @elections.each do |election| %>
+      <div class="p-4 bg-white rounded-lg shadow">
+
+        <div class="flex justify-between items-start">
+          <div>
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">
+              Name: <span class="font-normal"><%= election.name %></span>
+            </h2>
+            <p class="text-gray-600 mb-2">
+              Organization: <span class="font-normal"><%= election.organization.name %></span>
+            </p>
+          </div>
+
+          <div class="relative" data-controller="dropdown">
+            <button class="inline-block px-3 py-1 border border-b text-sm rounded-md hover:bg-white focus:outline-none focus:ring-2 focus:ring-white" data-action="click->dropdown#toggle">
+              <%= image_tag("setting.svg", alt: "Setting Icon") %>
+            </button>
+
+            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden" data-dropdown-target="dropdown">
+              <%= link_to 'Edit', edit_election_path(election), class: 'block px-4 py-2 text-sm text-yellow-600 hover:bg-yellow-50' %>
+              <%= link_to 'Delete', election_path(election), data: { turbo_confirm: 'Are you sure you want to delete this election?', turbo_method: :delete }, class: 'block px-4 py-2 text-sm text-red-600 hover:bg-red-50' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
