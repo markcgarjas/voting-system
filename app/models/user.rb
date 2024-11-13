@@ -11,7 +11,9 @@ class User < ApplicationRecord
   validates :email, :username, presence: true, uniqueness: true
 
   scope :search_data, lambda { |filter|
-    where('users.username LIKE ?', "%#{filter}%")
-      .or(where('users.email LIKE ?', "%#{filter}%"))
+    return all if filter.blank?
+    sanitized_filter = ActiveRecord::Base.sanitize_sql_like(filter)
+    where('users.username LIKE ?', "%#{sanitized_filter}%")
+      .or(where('users.email LIKE ?', "%#{sanitized_filter}%"))
   }
 end

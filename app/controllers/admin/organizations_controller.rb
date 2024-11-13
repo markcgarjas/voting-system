@@ -2,12 +2,8 @@ class Admin::OrganizationsController < AdminController
   before_action :set_organization, only: %i[edit update destroy]
 
   def index
-    @organizations = Organization.includes(members: %i[user officer_position])
-                                 .references(:users, :officer_positions)
-                                 .where('users.username LIKE ?', "%#{search_param}%")
-                                 .or(Member.where('officer_positions.name LIKE ?', "%#{search_param}%"))
-                                 .or(Organization.where('organizations.name LIKE ?', "%#{search_param}"))
-                                 .or(Organization.where('organizations.code LIKE ?', "%#{search_param}"))
+    @organizations = Organization.includes(members: %i[user officer_position]).search_data(search_param)
+    @organizations = @organizations.page(params[:page]).per(2)
   end
 
   def new

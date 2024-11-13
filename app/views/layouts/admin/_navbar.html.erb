@@ -4,7 +4,7 @@
 
     <%= form_with url: send("#{controller_name}_path"), method: :get, local: true, class: 'relative flex items-center space-x-2' do |form| %>
       <div class="relative w-full">
-        <%= form.text_field :search, value: params[:search], placeholder: "Search any in #{controller_name}...", class: 'px-3 py-1 rounded border border-gray-300 w-full pr-10' %>
+        <%= form.text_field :search, value: search_param, placeholder: "Search any in #{controller_name}...", class: 'px-3 py-1 rounded border border-gray-300 w-full pr-10' %>
       </div>
       <%= form.submit 'Search', class: 'bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600' %>
     <% end %>
