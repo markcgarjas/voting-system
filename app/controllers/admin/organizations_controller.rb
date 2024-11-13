@@ -2,7 +2,6 @@ class Admin::OrganizationsController < AdminController
   before_action :set_organization, only: %i[edit update destroy]
 
   def index
-    search_param = params[:search].to_s.strip
     @organizations = Organization.includes(members: %i[user officer_position])
                                  .references(:users, :officer_positions)
                                  .where('users.username LIKE ?', "%#{search_param}%")
