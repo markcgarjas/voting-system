@@ -6,6 +6,7 @@
   </div>
 
   <div class="space-y-4">
+    <%= paginate @organizations, remote: true %>
     <% @organizations.each do |organization| %>
       <div class="p-4 bg-white rounded-lg shadow">
 

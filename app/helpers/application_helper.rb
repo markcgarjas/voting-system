@@ -26,4 +26,8 @@ module ApplicationHelper
       'hover:bg-gray-700'
     end
   end
+
+  def search_param
+    params[:search].to_s.strip
+  end
 end
