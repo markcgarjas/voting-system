@@ -98,3 +98,9 @@ puts "Seeded #{officer_positions.count} positions created."
 end
 
 puts "Seeded #{Member.count} members."
+
+10.times do
+  Election.find_or_create_by(name: "#{Faker::Educator.subject} Student Council Election", user: User.admin.sample, organization: Organization.all.sample)
+end
+
+puts "Seeded #{Election.count} elections."

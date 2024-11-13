@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :officer_positions
       resources :students
       resources :admins
+      resources :elections
 
       root to: "home#index", as: :admin_root
     end
