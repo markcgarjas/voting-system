@@ -1,6 +1,7 @@
 class Organization < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :elections, dependent: :destroy
+  has_many :party_lists
 
   validates :name, :code, presence: true, uniqueness: true
 
