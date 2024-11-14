@@ -7,40 +7,20 @@
     <nav class="flex-1 p-4 space-y-2">
       <%= link_to 'Dashboard', admin_root_path, class: "block py-2 px-3 rounded" %>
 
-      <div class="space-y-1" data-controller="dropdown">
-        <button
-          class="w-full text-left py-2 px-3 rounded hover:bg-gray-700 flex justify-between items-center"
-          data-action="click->dropdown#toggle"
-        >
-          Student
-          <%= image_tag("dropdown.svg", alt: "Setting Icon") %>
-        </button>
-        <div data-dropdown-target="dropdown" class="space-y-1 pl-4 <%= menu_switch(:student, controller_name) %>">
-          <%= link_to 'Student Lists', students_path,
-                      class: "block py-1 px-3 rounded #{is_active('students')}" %>
-          <%= link_to 'Organization Lists', organizations_path,
-                      class: "block py-1 px-3 rounded #{is_active('organizations')}" %>
-          <%= link_to 'Officer Position Lists', officer_positions_path,
-                      class: "block py-1 px-3 rounded #{is_active('officer_positions')}" %>
-          <%= link_to 'Election Lists', elections_path,
-                      class: "block py-1 px-3 rounded #{is_active('elections')}" %>
+      <% Admin::SidebarHelper::MENU_LISTS.each do |role| %>
+        <div class="space-y-1" data-controller="dropdown">
+          <button class="w-full text-left py-2 px-3 rounded hover:bg-gray-700 flex justify-between items-center" data-action="click->dropdown#toggle">
+            <%= role[0].capitalize %>
+            <%= image_tag("dropdown.svg", alt: "Setting Icon") %>
+          </button>
+          <div data-dropdown-target="dropdown" class="space-y-1 pl-4 <%= menu_switch(:student, controller_name) %>">
+            <% Admin::SidebarHelper::MENU_LISTS[role[0]].each do |list| %>
+              <%= link_to "#{list.singularize.titleize} Lists", send("#{list}_path"),
+                          class: "block py-1 px-3 rounded #{is_active(list)}" %>
+            <% end %>
+          </div>
         </div>
-      </div>
-
-      <div class="space-y-1" data-controller="dropdown">
-        <button
-          class="w-full text-left py-2 px-3 rounded hover:bg-gray-700 flex justify-between items-center"
-          data-action="click->dropdown#toggle"
-        >
-          Admin
-          <%= image_tag("dropdown.svg", alt: "Setting Icon") %>
-        </button>
-        <div data-dropdown-target="dropdown" class="space-y-1 pl-4 <%= menu_switch(:admin, controller_name) %>">
-          <%= link_to 'Admin Lists', admins_path,
-                      class: "block py-1 px-3 rounded #{is_active('admins')}",
-                      onclick: "event.stopPropagation();" %>
-        </div>
-      </div>
+      <% end %>
       <%= link_to 'Sign Out', destroy_admin_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to logout?' }, class: 'block py-2 px-3 rounded hover:bg-gray-700' %>
     </nav>
   </div>
