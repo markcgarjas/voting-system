@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :students
       resources :admins
       resources :elections
+      resources :party_lists
 
       root to: "home#index", as: :admin_root
     end

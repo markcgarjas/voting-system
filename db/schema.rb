@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_12_015849) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_14_055056) do
   create_table "elections", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "organization_id"
     t.bigint "user_id"
@@ -45,6 +45,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_12_015849) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "party_lists", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "organization_id"
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_party_lists_on_organization_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
