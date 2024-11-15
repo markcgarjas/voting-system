@@ -33,8 +33,12 @@ class Admin::OrganizationsController < AdminController
   end
 
   def destroy
-    @organization.destroy
-    redirect_to organizations_path, notice: 'Organization was successfully destroyed.'
+    if @organization.destroy
+      flash[:notice] = 'Organization was successfully destroyed.'
+    else
+      flash[:alert] = @organization.errors.full_messages.join(', ')
+    end
+    redirect_to organizations_path
   end
 
   private

@@ -13,7 +13,7 @@
             <%= role[0].capitalize %>
             <%= image_tag("dropdown.svg", alt: "Setting Icon") %>
           </button>
-          <div data-dropdown-target="dropdown" class="space-y-1 pl-4 <%= menu_switch(:student, controller_name) %>">
+          <div data-dropdown-target="dropdown" class="space-y-1 pl-4 <%= menu_switch(role[0].to_sym, controller_name) %>">
             <% Admin::SidebarHelper::MENU_LISTS[role[0]].each do |list| %>
               <%= link_to "#{list.singularize.titleize} Lists", send("#{list}_path"),
                           class: "block py-1 px-3 rounded #{is_active(list)}" %>
@@ -21,7 +21,11 @@
           </div>
         </div>
       <% end %>
-      <%= link_to 'Sign Out', destroy_admin_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to logout?' }, class: 'block py-2 px-3 rounded hover:bg-gray-700' %>
+      <%= link_to 'Sign Out', destroy_admin_user_session_path,
+                  data: {
+                    action: 'click->sweet-alert#confirmSignOut',
+                    turbo_method: :delete
+                  }, class: 'block py-2 px-3 rounded hover:bg-gray-700' %>
     </nav>
   </div>
 <% end %>

@@ -26,7 +26,12 @@
 
             <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden" data-dropdown-target="dropdown">
               <%= link_to 'Edit', edit_election_path(election), class: 'block px-4 py-2 text-sm text-yellow-600 hover:bg-yellow-50' %>
-              <%= link_to 'Delete', election_path(election), data: { turbo_confirm: 'Are you sure you want to delete this election?', turbo_method: :delete }, class: 'block px-4 py-2 text-sm text-red-600 hover:bg-red-50' %>
+              <%= link_to 'Delete', election_path(election),
+                          data: {
+                            action: 'click->sweet-alert#confirmDelete',
+                            turbo_method: :delete
+                          },
+                          class: 'block px-4 py-2 text-sm text-red-600 hover:bg-red-50' %>
             </div>
           </div>
         </div>

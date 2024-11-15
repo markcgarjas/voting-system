@@ -2,3 +2,5 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "../assets/stylesheets/application.css"
+import Swal from 'sweetalert2';
+window.Swal = Swal;

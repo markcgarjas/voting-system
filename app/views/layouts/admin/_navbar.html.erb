@@ -1,7 +1,7 @@
 <% if admin_user_signed_in? %>
   <header class="bg-white p-4 shadow flex justify-between items-center">
     <h1 class="text-xl font-semibold text-gray-800">Admin Page</h1>
-    <% if controller_name != 'home' %>
+    <% unless %w[members home].include?(controller_name)  %>
       <%= form_with url: send("#{controller_name}_path"), method: :get, local: true, class: 'relative flex items-center space-x-2' do |form| %>
         <div class="relative w-full">
           <%= form.text_field :search, value: search_param, placeholder: "Search any in #{controller_name}...", class: 'px-3 py-1 rounded border border-gray-300 w-full pr-10' %>
