@@ -5,7 +5,7 @@
     <%= link_to 'Back to Lists', party_lists_path, class: 'inline-block px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
   </div>
 
-  <%= form_with model: @party_list, url: url, method: method, html: { class: 'w-full' }, data: { turbo: false } do |f| %>
+  <%= form_with model: @party_list, url: url, method: method, html: { class: 'w-full' } do |f| %>
     <div class="mb-4">
       <%= f.label :name, class: 'block text-sm font-medium text-gray-700' %>
       <%= f.text_field :name, class: 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2' %>
@@ -13,7 +13,10 @@
 
     <div class="mb-4">
       <%= f.label :description, class: 'block text-sm font-medium text-gray-700' %>
-      <%= f.text_field :description, class: 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2' %>
+      <%= f.text_area :description,
+                      class: 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2',
+                      rows: 4,
+                      placeholder: 'Enter party list description' %>
     </div>
 
     <div class="mb-4">
