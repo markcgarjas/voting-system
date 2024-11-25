@@ -1,0 +1,146 @@
+/* Main Page Styles */
+.student-list-page {
+  padding: 30px;
+  background-color: #f4f8fc;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  border: 1px solid #e3e6eb;
+
+  /* Header Section */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e88e5;
+  }
+
+  .header .btn {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  }
+
+  .header .btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+  }
+
+  /* Student List Grid */
+  .student-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  /* Student Card */
+  .student-card {
+    background: #ffffff;
+    border: 1px solid #e3e6eb;
+    border-radius: 15px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .student-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
+
+  /* Profile Image */
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #1e88e5;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .profile-image:hover {
+    transform: scale(1.1);
+  }
+
+  /* Student Info */
+  .student-info {
+    margin-top: 10px;
+  }
+
+  .student-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #333;
+  }
+
+  .student-email {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .student-details {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #1e88e5;
+    color: white;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .student-details:hover {
+    background-color: #1565c0;
+  }
+
+  /* No Students Section */
+  .no-students {
+    text-align: center;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e3e6eb;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .no-students h2 {
+    font-size: 20px;
+    color: #444;
+    margin-bottom: 15px;
+  }
+
+  .no-students .btn {
+    padding: 10px 20px;
+    background-color: #1e88e5;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  }
+
+  .no-students .btn:hover {
+    background-color: #1565c0;
+    transform: translateY(-2px);
+  }
+}

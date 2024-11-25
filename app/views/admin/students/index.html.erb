@@ -1,11 +1,29 @@
-<div class="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
-  <h1 class="text-2xl font-bold mb-4">Student Lists</h1>
+<div class="student-list-page">
+  <!-- Header Section -->
+  <div class="header">
+    <h1>Student Lists</h1>
+    <%= link_to 'New Student', new_student_path, class: 'btn btn-primary' %>
+  </div>
 
-  <div class="space-y-4">
-    <% @students.each do |student| %>
-      <div class="p-4 bg-white rounded-lg shadow">
-        <p class="text-xl font-semibold text-gray-800 mb-2">Email: <span class="font-normal"><%= student.email %></span></p>
-        <p class="text-gray-600">Username: <span class="font-normal"><%= student.username %></span></p>
+  <!-- Student List Section -->
+  <div class="student-list">
+    <% if @students.any? %>
+      <% @students.each do |student| %>
+        <%= link_to student_path(student), class: 'student-card' do %>
+          <div class="student-profile">
+            <%= image_tag "profile.svg", alt: "Profile Icon", class: 'profile-image' %>
+          </div>
+          <div class="student-info">
+            <h2 class="student-name"><%= student.username %></h2>
+            <p class="student-email"><%= student.email %></p>
+            <span class="student-details">View Details</span>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <div class="no-students">
+        <h2>No Students Found.</h2>
+        <%= link_to 'Add Student', new_student_path, class: 'btn btn-secondary' %>
       </div>
     <% end %>
   </div>

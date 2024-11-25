@@ -1,0 +1,37 @@
+<div class="student-details-page">
+  <!-- Header with Title and Action Links -->
+  <div class="student-details-header">
+    <h1>Student Details</h1>
+    <div class="student-details-actions">
+      <%= link_to 'Edit Student', edit_student_path(@student), class: 'btn btn-edit' %>
+      <%= link_to 'Delete Student', student_path(@student),
+                  data: { action: 'click->sweet-alert#confirmDelete', turbo_method: :delete },
+                  class: 'btn btn-delete' %>
+    </div>
+  </div>
+
+  <!-- Student Information Section -->
+  <div class="student-details-info">
+    <div class="student-details-avatar">
+      <%= image_tag "profile.svg", alt: "Profile Icon", class: 'profile-image' %>
+    </div>
+
+    <div class="student-details-details">
+      <div class="student-detail-item">
+        <b>Username:</b> <%= @student.username %>
+      </div>
+      <div class="student-detail-item">
+        <b>Email:</b> <%= @student.email %>
+      </div>
+      <div class="student-detail-item">
+        <b>Section:</b> <%= @student.email %>
+      </div>
+      <div class="student-detail-item">
+        <b>Year:</b> <%= @student.email %>
+      </div>
+      <div class="student-detail-item">
+        <b>Status:</b> <%= @student.email %>
+      </div>
+    </div>
+  </div>
+</div>

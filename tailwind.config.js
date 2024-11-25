@@ -6,7 +6,12 @@ module.exports = {
     './app/views/**/*.{erb,html}',
   ],
   theme: {
-    extend: {}
+    extend: {
+      colors: {},
+      fontFamily: {
+        roboto: ['Roboto', 'serif'],
+      },
+    }
   },
   plugins: [],
 }
