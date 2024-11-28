@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   enum role: { student: 0, admin: 1 }
 
+  after_create_commit :broadcast_new_user_notification
+
   validates :email, :username, presence: true, uniqueness: true
 
   scope :search_data, lambda { |filter|
@@ -16,4 +18,12 @@ class User < ApplicationRecord
     where('users.username LIKE ?', "%#{sanitized_filter}%")
       .or(where('users.email LIKE ?', "%#{sanitized_filter}%"))
   }
+  private
+
+  def broadcast_new_user_notification
+    ActionCable.server.broadcast(
+      "admin_notifications",
+      { notice: "New user signed up: #{username}!", alert: nil }
+    )
+  end
 end
