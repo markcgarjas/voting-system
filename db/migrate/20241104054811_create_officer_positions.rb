@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOfficerPositions < ActiveRecord::Migration[7.0]
   def change
     create_table :officer_positions do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AdminController < ActionController::Base
   include ApplicationHelper
   include Admin::Rescueable

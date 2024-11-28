@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -14,6 +16,7 @@ class User < ApplicationRecord
 
   scope :search_data, lambda { |filter|
     return all if filter.blank?
+
     sanitized_filter = ActiveRecord::Base.sanitize_sql_like(filter)
     where('users.username LIKE ?', "%#{sanitized_filter}%")
       .or(where('users.email LIKE ?', "%#{sanitized_filter}%"))
@@ -35,7 +38,7 @@ class User < ApplicationRecord
 
   def broadcast_new_user_notification
     ActionCable.server.broadcast(
-      "admin_notifications",
+      'admin_notifications',
       {
         notice: "New user signed up: #{username}! #{view_student}".html_safe,
         alert: nil

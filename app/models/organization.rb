@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Organization < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :elections, dependent: :destroy
@@ -5,7 +7,7 @@ class Organization < ApplicationRecord
 
   validates :name, :code, presence: true, uniqueness: true
 
-  scope :search_data, ->(query) {
+  scope :search_data, lambda { |query|
     return all if query.blank?
 
     includes(members: %i[user officer_position])
