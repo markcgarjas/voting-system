@@ -4,7 +4,7 @@ class NotificationChannel < ApplicationCable::Channel
     if current_user.admin?
       stream_from "admin_notifications"
     else
-      reject_unauthorized_connection
+      reject
     end
   end
 

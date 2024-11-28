@@ -18,3 +18,8 @@ svg {
   display: block;
   max-width: 100%;
 }
+
+.link-style {
+  color: #3085d6;
+  text-decoration: underline;
+}

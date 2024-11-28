@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Students::RegistrationsController < Devise::RegistrationsController
+  include LoginVerifier
   def create
     super
-    self.resource = resource_class.new(sign_up_params)
-    resource.save
+    save_session_token(resource)
   end
 
   private

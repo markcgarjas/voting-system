@@ -18,12 +18,28 @@ class User < ApplicationRecord
     where('users.username LIKE ?', "%#{sanitized_filter}%")
       .or(where('users.email LIKE ?', "%#{sanitized_filter}%"))
   }
+
+  def disappear
+    update(session_token: nil)
+  end
+
   private
+
+  def view_student
+    ActionController::Base.helpers.link_to(
+      'View Details',
+      Rails.application.routes.url_helpers.student_path(self),
+      class: 'link-style'
+    )
+  end
 
   def broadcast_new_user_notification
     ActionCable.server.broadcast(
       "admin_notifications",
-      { notice: "New user signed up: #{username}!", alert: nil }
+      {
+        notice: "New user signed up: #{username}! #{view_student}".html_safe,
+        alert: nil
+      }
     )
   end
 end
