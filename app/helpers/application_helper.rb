@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def sorted_organization_members(members)
     members.sort_by { |member| member.officer_position.sort }
   end
 
   def sorted_students(students)
-    students.sort_by { |user| user.username }
+    students.sort_by(&:username)
   end
 
   def sorted_positions(positions)
-    positions.sort_by { |position| position.name }
+    positions.sort_by(&:name)
   end
 
   def content_title

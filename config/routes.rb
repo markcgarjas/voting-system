@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   constraints(AdminDomainConstraint.new) do
     scope module: 'admin' do
@@ -13,7 +15,7 @@ Rails.application.routes.draw do
       resources :elections
       resources :party_lists
 
-      root to: "home#index", as: :admin_root
+      root to: 'home#index', as: :admin_root
     end
   end
 
@@ -25,6 +27,6 @@ Rails.application.routes.draw do
                  passwords: 'students/passwords'
                }
 
-    root to: "students/home#index", as: :student_root
+    root to: 'students/home#index', as: :student_root
   end
 end

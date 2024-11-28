@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StudentDomainConstraint
   def matches?(request)
     domains = Rails.application.config_for(:domain)[:student]
