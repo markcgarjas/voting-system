@@ -3,9 +3,17 @@
 module Students
   class RegistrationsController < Devise::RegistrationsController
     include LoginVerifier
+
     def create
-      super
-      save_session_token(resource)
+      build_resource(sign_up_params)
+      if resource.save
+        sign_up(resource_name, resource)
+        save_session_token(resource)
+        redirect_to student_root_path, notice: "Hi, welcome #{resource.username}!"
+      else
+        flash[:alert] = resource.errors.full_messages.join(', ')
+        render :new, status: :unprocessable_entity
+      end
     end
 
     private

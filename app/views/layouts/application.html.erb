@@ -11,9 +11,11 @@
   </head>
 
   <body>
-    <%= render 'layouts/students/navbar' %>
+    <%= render 'layouts/students/navbar' if current_user %>
     <%= render 'layouts/flash' %>
 
-    <%= yield %>
+    <main class="flex-1 overflow-y-auto">
+      <%= yield %>
+    </main>
   </body>
 </html>
