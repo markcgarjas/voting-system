@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>
-      <%= content_title %>
+      <%= "Admin | #{content_title}" %>
     </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -13,17 +13,20 @@
   </head>
 
   <body>
-    <div class="flex h-screen bg-gray-100 font-sans" data-controller="sweet-alert" data-sweet-alert-controller-path-value="<%= "#{request.base_url}/#{controller_name}" %>">
-      <%= render 'layouts/admin/sidebar' %>
+  <div class="flex min-h-screen bg-gray-100 font-sans" data-controller="sweet-alert" data-sweet-alert-controller-path-value="<%= "#{request.base_url}/#{controller_name}" %>">
+    <%= render 'layouts/admin/sidebar' %>
 
-      <div class="flex-1 flex flex-col">
-        <%= render 'layouts/flash' %>
-        <%= render 'layouts/admin/navbar' %>
+    <div class="flex-1 flex flex-col <%= 'ml-64' if current_admin_user %>">
+      <%= render 'layouts/flash' %>
+      <%= render 'layouts/admin/header' %>
 
-        <main class="flex-1 p-6 overflow-y-auto">
-          <%= yield %>
-        </main>
-      </div>
+      <main class="flex-1 p-6 overflow-y-auto bg-gray-100">
+        <div class="page-container">
+          <%= render_breadcrumbs if current_admin_user %>
+        <%= yield %>
+        </div>
+      </main>
     </div>
+  </div>
   </body>
 </html>

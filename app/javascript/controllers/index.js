@@ -13,5 +13,11 @@ application.register("flash", FlashController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import SearchController from "./search_controller"
+application.register("search", SearchController)
+
+import SidebarController from "./sidebar_controller"
+application.register("sidebar", SidebarController)
+
 import SweetAlertController from "./sweet_alert_controller"
 application.register("sweet-alert", SweetAlertController)

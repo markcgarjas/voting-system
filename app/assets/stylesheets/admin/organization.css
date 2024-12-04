@@ -1,0 +1,37 @@
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+[data-animation="bounce"]:hover {
+  animation: bounce 0.5s ease infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Border Pulse Animation */
+.border-dashed {
+  animation: borderPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes borderPulse {
+  0%, 100% {
+    border-color: rgba(209, 213, 219, 1);
+  }
+  50% {
+    border-color: rgba(209, 213, 219, 0.5);
+  }
+}
