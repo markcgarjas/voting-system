@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-officer-position" width="48" height="48">
+  <!-- Badge outline -->
+  <path d="M12 2l2.09 6.26L20 10l-5 3.74L15.91 20 12 16.76 8.09 20 10 13.74 5 10l5.91-1.74L12 2z"></path>
+  <!-- Star inside the badge -->
+  <path d="M12 8l1.5 4h-3L12 8z"></path>
+</svg>

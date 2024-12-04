@@ -1,30 +1,119 @@
-<div class="student-list-page">
-  <!-- Header Section -->
-  <div class="header">
-    <h1>Student Lists</h1>
-    <%= link_to 'New Student', new_student_path, class: 'btn btn-primary' %>
+<div class="page-header">
+  <div>
+    <h1>Student Management</h1>
+    <p>Manage and monitor your student roster</p>
   </div>
 
-  <!-- Student List Section -->
-  <div class="student-list">
-    <% if @students.any? %>
+  <%= link_to new_student_path,
+              class: "primary-button" do %>
+    <%= image_tag 'admin/plus.svg', class: 'w-5 h-5 mr-2' %>
+    Add New Student
+  <% end %>
+</div>
+
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+  <div class="bg-white overflow-hidden shadow rounded-lg">
+    <div class="p-5">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <%= image_tag 'admin/people.svg', class: 'h-6 w-6 text-gray-400' %>
+        </div>
+        <div class="ml-5 w-0 flex-1">
+          <dl>
+            <dt class="text-sm font-medium text-gray-500 truncate">Total Students</dt>
+            <dd class="flex items-baseline">
+              <div class="text-2xl font-semibold text-gray-900"><%= @total_students %></div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-white overflow-hidden shadow rounded-lg">
+    <div class="p-5">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <%= image_tag 'admin/voters.svg', class: 'h-6 w-6 text-gray-400' %>
+        </div>
+        <div class="ml-5 w-0 flex-1">
+          <dl>
+            <dt class="text-sm font-medium text-gray-500 truncate">Total Students Who Voted</dt>
+            <dd class="flex items-baseline">
+              <div class="text-2xl font-semibold text-gray-900">10</div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add more stat cards as needed -->
+</div>
+
+<!-- Pagination -->
+<div class="mb-6 w-full">
+  <%= paginate @students, remote: true %>
+</div>
+
+<!-- Student List -->
+<div class="bg-white shadow rounded-lg overflow-hidden">
+  <% if @students.any? %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
       <% @students.each do |student| %>
-        <%= link_to student_path(student), class: 'student-card' do %>
-          <div class="student-profile">
-            <%= image_tag "profile.svg", alt: "Profile Icon", class: 'profile-image' %>
+        <%= link_to student_path(student),
+                    class: "relative group bg-white border border-gray-200 rounded-lg p-6 hover:border-blue-500 transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg" do %>
+
+          <!-- Status Indicator -->
+          <div class="absolute top-4 right-4">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                Active
+              </span>
           </div>
-          <div class="student-info">
-            <h2 class="student-name"><%= student.username %></h2>
-            <p class="student-email"><%= student.email %></p>
-            <span class="student-details">View Details</span>
+
+          <!-- Student Profile -->
+          <div class="flex flex-col items-center student-card">
+            <div class="relative">
+              <div class="w-20 h-20 bg-gray-100 rounded-full overflow-hidden border-4 border-white shadow-inner group-hover:border-blue-500 transition-all duration-300">
+                <%= image_tag "admin/profile.svg",
+                              alt: "#{student.username}'s profile",
+                              class: "w-full h-full object-cover" %>
+              </div>
+              <div class="absolute bottom-0 right-0 w-5 h-5 bg-green-400 border-2 border-white rounded-full"></div>
+            </div>
+
+            <div class="mt-4 text-center">
+              <h3 class="text-lg font-medium text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                <%= student.username %>
+              </h3>
+              <p class="text-sm text-gray-500 mt-1"><%= student.email %></p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="mt-4 grid gap-4 w-full">
+              <div class="text-center">
+                <span class="text-sm font-medium text-gray-500">Already Voted?</span>
+                <p class="mt-1 text-lg font-semibold text-gray-900">Not Yet</p>
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="mt-6 w-full">
+                <span class="block w-full rounded-lg bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 text-center group-hover:bg-blue-50 group-hover:text-blue-700 transition-all duration-300">
+                  View Details
+                  <%= image_tag 'admin/right-chevron.svg', class: 'w-4 h-4 inline-block ml-2 -mt-1' %>
+                </span>
+            </div>
           </div>
         <% end %>
       <% end %>
-    <% else %>
-      <div class="no-students">
-        <h2>No Students Found.</h2>
-        <%= link_to 'Add Student', new_student_path, class: 'btn btn-secondary' %>
-      </div>
-    <% end %>
-  </div>
+    </div>
+
+  <% else %>
+    <!-- Empty State -->
+    <div class="text-center py-12 px-4">
+      <%= image_tag 'admin/add-people.svg', class: 'mx-auto h-12 w-12 text-gray-400' %>
+      <h3 class="mt-2 text-sm font-medium text-gray-900">No students</h3>
+      <p class="mt-1 text-sm text-gray-500">Get started by creating a new student profile.</p>
+    </div>
+  <% end %>
 </div>
