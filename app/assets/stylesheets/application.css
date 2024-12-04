@@ -3,7 +3,10 @@
 @import 'admin/student_list.css';
 @import 'admin/profile_detail.css';
 @import 'admin/sidebar_list.css';
+@import 'admin/header.css';
+@import 'admin/organization.css';
 @import 'student/login.css';
+@import 'student/homepage.css';
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files

@@ -6,7 +6,8 @@ module Admin
 
     def index
       @organizations = Organization.includes(members: %i[user officer_position]).search_data(search_param)
-      @organizations = @organizations.page(params[:page]).per(2)
+      @organizations = @organizations.page(params[:page]).per(10)
+      @total_organizations = Organization.count
     end
 
     def new

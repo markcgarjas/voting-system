@@ -1,48 +1,104 @@
-<div class="new-edit-student-page">
-  <!-- Header Section -->
-  <div class="header">
-    <h1><%= action_name.capitalize %> Student Details</h1>
-    <%= link_to 'Back', back_url, class: 'btn btn-secondary' %>
-  </div>
-
-  <!-- Profile and Form Section -->
-  <div class="details-container">
-    <!-- Profile Image -->
-    <div class="profile-image-container">
-      <%= image_tag "profile.svg", alt: "Profile Icon", class: 'profile-image' %>
+<!-- Main Content -->
+<div class="form-container">
+  <div class="bg-white rounded-lg shadow-lg">
+    <!-- Header -->
+    <div class="px-8 py-6 border-b border-gray-200 flex items-center justify-between">
+      <h1 class="text-2xl font-bold text-gray-900">
+        <%= action_name.capitalize %> Student Details
+      </h1>
+      <%= link_to back_url,
+                  class: "button-back" do %>
+        <%= image_tag 'admin/back-button.svg', class: 'w-4 h-4 mr-1.5' %>
+        Back
+      <% end %>
     </div>
 
-    <!-- Form Section -->
-    <%= form_with model: @student, url: url, method: method, class: 'student-form' do |form| %>
-      <div class="form-group">
-        <label>Username:</label>
-        <%= form.text_field :username, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label>Email:</label>
-        <%= form.email_field :email, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label>Section:</label>
-        <%= form.text_field :section, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label>Year:</label>
-        <%= form.text_field :year, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label>Status:</label>
-        <%= form.text_field :status, class: 'form-control' %>
-      </div>
-      <% unless @student.persisted? %>
-        <div class="form-group">
-          <label>Password:</label>
-          <h2 class="generated-password"><%= cookies[:password] %></h2>
+    <!-- Form Content -->
+    <div class="p-8">
+      <div class="grid grid-cols-1 gap-8">
+        <!-- Profile Image Section -->
+        <div class="text-center mb-8">
+          <div class="relative inline-block">
+            <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-xl mx-auto bg-gray-50">
+              <%= image_tag "admin/profile.svg", alt: "Profile Icon", class: "w-full h-full object-cover" %>
+            </div>
+            <button type="button" class="absolute bottom-2 right-2 bg-blue-600 rounded-full p-3 text-white hover:bg-blue-700 transition-colors duration-300 shadow-lg">
+              <%= image_tag 'admin/camera.svg', class: 'w-5 h-5' %>
+            </button>
+          </div>
         </div>
-      <% end %>
-      <div class="form-group">
-        <%= form.submit submit_text, class: 'btn btn-primary' %>
+
+        <!-- Form Section -->
+        <%= form_with model: @student, url: url, method: method, class: "space-y-8" do |form| %>
+          <div class="grid grid-cols-1 gap-2">
+            <!-- Username Field -->
+            <div class="form-group">
+              <%= form.label :username, class: "block text-base font-medium text-gray-700 mb-2" %>
+              <%= form.text_field :username,
+                                  class: "input-field",
+                                  placeholder: "Enter username" %>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+              <%= form.label :email, class: "block text-base font-medium text-gray-700 mb-2" %>
+              <%= form.email_field :email,
+                                   class: "input-field",
+                                   placeholder: "Enter email address" %>
+            </div>
+
+            <!-- Section Field -->
+            <div class="form-group">
+              <%= form.label :section, class: "block text-base font-medium text-gray-700 mb-2" %>
+              <%= form.text_field :section,
+                                  class: "input-field",
+                                  placeholder: "Enter section" %>
+            </div>
+
+            <!-- Year Field -->
+            <div class="form-group">
+              <%= form.label :year, class: "block text-base font-medium text-gray-700 mb-2" %>
+              <%= form.text_field :year,
+                                  class: "input-field",
+                                  placeholder: "Enter year" %>
+            </div>
+
+            <!-- Status Field -->
+            <div class="form-group">
+              <%= form.label :status, class: "block text-base font-medium text-gray-700 mb-2" %>
+              <%= form.select :status,
+                              %w[Active Inactive],
+                              {},
+                              class: "input-field" %>
+            </div>
+          </div>
+
+          <!-- Password Display (for new students) -->
+          <% unless @student.persisted? %>
+            <div class="bg-gray-50 rounded-lg p-6 border border-gray-200 mt-8">
+              <div class="flex items-center justify-between">
+                <div>
+                  <label class="block text-base font-medium text-gray-700 mb-2">Generated Password</label>
+                  <h2 class="text-xl font-mono text-gray-900"><%= session[:temp_password] %></h2>
+                </div>
+                <button type="button" class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                  <%= image_tag 'admin/copy.svg', class: 'w-5 h-5 mr-2' %>
+                  Copy Password
+                </button>
+              </div>
+            </div>
+          <% end %>
+
+          <!-- Submit Button -->
+          <div class="flex justify-end space-x-4 mt-8">
+            <%= link_to 'Cancel', back_url,
+                        class: "inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300" %>
+
+            <%= form.submit submit_text,
+                            class: "inline-flex items-center px-8 py-3 border border-transparent rounded-lg text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300" %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

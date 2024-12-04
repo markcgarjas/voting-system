@@ -1,36 +1,102 @@
-<div class="student-details-page">
-  <!-- Header with Title and Action Links -->
-  <div class="student-details-header">
-    <h1>Student Details</h1>
-    <div class="student-details-actions">
-      <%= link_to 'Edit Student', edit_student_path(@student), class: 'btn btn-edit' %>
-      <%= link_to 'Delete Student', student_path(@student),
+<!-- Main Content -->
+<div class="bg-white rounded-lg shadow student-details-page">
+  <!-- Header -->
+  <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+    <h1 class="text-2xl font-bold text-gray-900">Student Profile</h1>
+    <div class="flex items-center space-x-3">
+      <%= link_to edit_student_path(@student),
+                  class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300" do %>
+        <%= image_tag 'admin/edit.svg', class: 'w-4 h-4 mr-2' %>
+        Edit Profile
+      <% end %>
+
+      <%= link_to student_path(@student),
                   data: { action: 'click->sweet-alert#confirmDelete', turbo_method: :delete },
-                  class: 'btn btn-delete' %>
+                  class: "inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-300" do %>
+        <%= image_tag 'admin/delete.svg', class: 'w-4 h-4 mr-2' %>
+        Delete Student
+      <% end %>
     </div>
   </div>
 
-  <!-- Student Information Section -->
-  <div class="student-details-info">
-    <div class="student-details-avatar">
-      <%= image_tag "profile.svg", alt: "Profile Icon", class: 'profile-image' %>
+  <!-- Profile Content -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
+    <!-- Left Column - Profile Image and Quick Stats -->
+    <div class="lg:col-span-1 hover-card">
+      <div class="bg-gray-50 rounded-lg p-6 text-center">
+        <div class="relative inline-block">
+          <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto">
+            <%= image_tag "admin/profile.svg", alt: "#{@student.username}'s profile", class: "w-full h-full object-cover" %>
+          </div>
+          <div class="absolute bottom-2 right-2 w-4 h-4 bg-green-400 border-2 border-white rounded-full"></div>
+        </div>
+
+        <h2 class="mt-4 text-xl font-bold text-gray-900"><%= @student.username %></h2>
+        <p class="text-sm text-gray-500"><%= @student.email %></p>
+
+        <!-- Quick Stats -->
+        <div class="mt-6 grid justify-center gap-4">
+          <div class=" bg-white p-4 rounded-lg shadow-sm w-32">
+            <div class="text-sm font-medium text-gray-500">Already Voted?</div>
+            <div class="mt-1 text-xl font-semibold text-gray-900">Not Yet</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="student-details-details">
-      <div class="student-detail-item">
-        <b>Username:</b> <%= @student.username %>
-      </div>
-      <div class="student-detail-item">
-        <b>Email:</b> <%= @student.email %>
-      </div>
-      <div class="student-detail-item">
-        <b>Section:</b> <%= @student.email %>
-      </div>
-      <div class="student-detail-item">
-        <b>Year:</b> <%= @student.email %>
-      </div>
-      <div class="student-detail-item">
-        <b>Status:</b> <%= @student.email %>
+    <!-- Right Column - Detailed Information -->
+    <div class="lg:col-span-2 hover-card">
+      <div class="bg-white rounded-lg">
+        <!-- Basic Information -->
+        <div class="border-b border-gray-200">
+          <div class="px-6 py-4">
+            <h3 class="text-lg font-medium text-gray-900">Basic Information</h3>
+          </div>
+          <div class="px-6 py-4 space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-500">Full Name</label>
+                <div class="mt-1 text-sm text-gray-900"><%= @student.username %></div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-500">Email Address</label>
+                <div class="mt-1 text-sm text-gray-900"><%= @student.email %></div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-500">Student ID</label>
+                <div class="mt-1 text-sm text-gray-900">#<%= @student.id %></div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-500">Status</label>
+                <div class="mt-1">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                      Active
+                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Information -->
+        <div>
+          <div class="px-6 py-4">
+            <h3 class="text-lg font-medium text-gray-900">Academic Information</h3>
+          </div>
+          <div class="px-6 py-4 space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-500">Section</label>
+                <div class="mt-1 text-sm text-gray-900">IV-AINS</div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-500">Year Level</label>
+                <div class="mt-1 text-sm text-gray-900"> 2nd Year </div>
+              </div>
+              <!-- Add more academic details as needed -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

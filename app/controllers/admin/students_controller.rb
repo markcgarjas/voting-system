@@ -5,20 +5,23 @@ module Admin
     before_action :set_student, only: %i[show edit update destroy]
 
     def index
-      @students = User.student.order(:created_at)
+      @students = User.student.order(:created_at).page(params[:page]).per(12)
       @students = @students.search_data(search_param) if search_param
+      @total_students = User.student.count
     end
 
     def new
-      cookies[:password] = SecureRandom.alphanumeric(18) unless cookies[:password]
+      session[:temp_password] = SecureRandom.alphanumeric(18) unless session[:temp_password]
 
       @student = User.student.new
     end
 
     def create
-      @student = User.student.new(student_params.merge(password: cookies[:password]))
+      @student = User.student.new(student_params)
+      @student.password = session[:temp_password]
+
       if @student.save
-        cookies.delete(:password)
+        session.delete(:temp_password)
         redirect_to students_path, notice: 'Student created successfully.'
       else
         flash.now[:alert] = @student.errors.full_messages.join(', ')

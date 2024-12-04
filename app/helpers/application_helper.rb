@@ -1,6 +1,24 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include BreadcrumbHelper
+
+  def custom_breadcrumb_title
+    @custom_breadcrumb_title
+  end
+
+  def set_breadcrumb_title(title)
+    @custom_breadcrumb_title = title
+  end
+
+  def custom_breadcrumb_path
+    @custom_breadcrumb_path
+  end
+
+  def set_breadcrumb_path(path)
+    @custom_breadcrumb_path = path
+  end
+
   def sorted_organization_members(members)
     members.sort_by { |member| member.officer_position.sort }
   end
@@ -31,5 +49,10 @@ module ApplicationHelper
 
   def search_param
     params[:search].to_s.strip
+  end
+
+  def total_count(model_name)
+    model_name = model_name == 'students' ? 'users' : model_name
+    model_name.to_s.classify.constantize.count
   end
 end
