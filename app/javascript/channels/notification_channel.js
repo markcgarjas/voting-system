@@ -1,6 +1,12 @@
 import consumer from "./consumer"
 
 consumer.subscriptions.create("NotificationChannel", {
+  disconnected() {
+    setTimeout(() => {
+      consumer.subscriptions.create("NotificationChannel");
+    }, 5000);
+  },
+
   received(data) {
 
     if (data.notice || data.alert) {
