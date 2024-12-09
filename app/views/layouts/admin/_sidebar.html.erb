@@ -1,55 +1,57 @@
 <% if admin_user_signed_in? %>
-  <div id="sidebar" class="w-64 min-h-screen fixed left-0 top-0 z-40 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white flex flex-col shadow-xl transition-all duration-300 ease-in-out display-sidebar">
-    <%= link_to admin_root_path, class: 'p-6 text-center font-bold text-xl border-b border-gray-700/50 bg-gray-800/50 hover:bg-gray-700 transition-all duration-300 flex items-center justify-center gap-2' do %>
-      <span class="text-blue-400">Admin Dashboard</span>
-    <% end %>
-
-    <nav class="flex-1 p-4 space-y-4 overflow-y-auto sidebar-scrollbar">
-      <%= link_to admin_root_path,
-                  class: "block py-2.5 px-4 rounded-lg bg-gray-800/50 hover:bg-gray-700 transition-all duration-300 font-medium hover:translate-x-1 flex items-center gap-2 border-l-4 border-transparent hover:border-blue-400" do %>
-        <%= image_tag 'admin/home.svg', class: 'w-5 h-5' %>
-        Dashboard
+  <% cache [:sidebar_page, current_admin_user.present?.to_s] do %>
+    <div id="sidebar" class="w-64 min-h-screen fixed left-0 top-0 z-40 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white flex flex-col shadow-xl transition-all duration-300 ease-in-out display-sidebar">
+      <%= link_to admin_root_path, class: 'p-6 text-center font-bold text-xl border-b border-gray-700/50 bg-gray-800/50 hover:bg-gray-700 transition-all duration-300 flex items-center justify-center gap-2' do %>
+        <span class="text-blue-400">Admin Dashboard</span>
       <% end %>
 
-      <% Admin::SidebarHelper::MENU_LISTS.each do |role| %>
-        <div class="space-y-2" data-controller="dropdown">
-          <button
-            class="w-full text-left py-2.5 px-4 rounded-lg hover:bg-gray-700 bg-gray-800/50 transition-all duration-300 flex justify-between items-center font-medium group hover:translate-x-1 border-l-4 border-transparent hover:border-blue-400"
-            data-action="click->dropdown#toggle"
-          >
-            <div class="flex items-center gap-2">
-              <%= image_tag "admin/sidebar-icons/#{role[0]}s.svg", class: 'w-5 h-5' %>
-              <span><%= role[0].capitalize %></span>
-            </div>
-            <%= image_tag("admin/dropdown.svg", alt: "Dropdown Icon", class: "w-4 h-4 ml-2 transform transition-transform duration-200 opacity-75 group-hover:opacity-100") %>
-          </button>
+      <nav class="flex-1 p-4 space-y-4 overflow-y-auto sidebar-scrollbar">
+        <%= link_to admin_root_path,
+                    class: "block py-2.5 px-4 rounded-lg bg-gray-800/50 hover:bg-gray-700 transition-all duration-300 font-medium hover:translate-x-1 flex items-center gap-2 border-l-4 border-transparent hover:border-blue-400" do %>
+          <%= image_tag 'admin/home.svg', class: 'w-5 h-5' %>
+          Dashboard
+        <% end %>
 
-          <div
-            data-dropdown-target="dropdown"
-            class="space-y-1 pl-6 pt-2 <%= menu_switch(role[0].to_sym, controller_name) %>"
-          >
-            <% Admin::SidebarHelper::MENU_LISTS[role[0]].each do |list| %>
+        <% Admin::SidebarHelper::MENU_LISTS.each do |role| %>
+          <div class="space-y-2" data-controller="dropdown">
+            <button
+              class="w-full text-left py-2.5 px-4 rounded-lg hover:bg-gray-700 bg-gray-800/50 transition-all duration-300 flex justify-between items-center font-medium group hover:translate-x-1 border-l-4 border-transparent hover:border-blue-400"
+              data-action="click->dropdown#toggle"
+            >
               <div class="flex items-center gap-2">
-                <%= link_to send("#{list}_path"),
-                            class: "w-full block py-2 px-4 rounded-lg hover:bg-gray-700/50 transition-all duration-300 #{is_active(list)} text-sm font-light hover:translate-x-1 flex items-center gap-2" do %>
-                  <%= image_tag "admin/sidebar-icons/#{list}.svg", class: 'w-5 h-5' %>
-                  <%= "#{list.singularize.titleize} Lists" %>
-                <% end %>
+                <%= image_tag "admin/sidebar-icons/#{role[0]}s.svg", class: 'w-5 h-5' %>
+                <span><%= role[0].capitalize %></span>
               </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+              <%= image_tag("admin/dropdown.svg", alt: "Dropdown Icon", class: "w-4 h-4 ml-2 transform transition-transform duration-200 opacity-75 group-hover:opacity-100") %>
+            </button>
 
-      <%= link_to destroy_admin_user_session_path,
-                  data: {
-                    action: 'click->sweet-alert#confirmSignOut',
-                    turbo_method: :delete
-                  },
-                  class: 'mt-auto block py-2.5 px-4 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all duration-300 font-medium hover:translate-x-1 flex items-center gap-2' do %>
-        <%= image_tag 'admin/sign-out.svg', class: 'w-5 h-5' %>
-        Sign Out
-      <% end %>
-    </nav>
-  </div>
+            <div
+              data-dropdown-target="dropdown"
+              class="space-y-1 pl-6 pt-2 <%= menu_switch(role[0].to_sym, controller_name) %>"
+            >
+              <% Admin::SidebarHelper::MENU_LISTS[role[0]].each do |list| %>
+                <div class="flex items-center gap-2">
+                  <%= link_to send("#{list}_path"),
+                              class: "w-full block py-2 px-4 rounded-lg hover:bg-gray-700/50 transition-all duration-300 #{is_active(list)} text-sm font-light hover:translate-x-1 flex items-center gap-2" do %>
+                    <%= image_tag "admin/sidebar-icons/#{list}.svg", class: 'w-5 h-5' %>
+                    <%= "#{list.singularize.titleize} Lists" %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <%= link_to destroy_admin_user_session_path,
+                    data: {
+                      action: 'click->sweet-alert#confirmSignOut',
+                      turbo_method: :delete
+                    },
+                    class: 'mt-auto block py-2.5 px-4 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all duration-300 font-medium hover:translate-x-1 flex items-center gap-2' do %>
+          <%= image_tag 'admin/sign-out.svg', class: 'w-5 h-5' %>
+          Sign Out
+        <% end %>
+      </nav>
+    </div>
+  <% end %>
 <% end %>
