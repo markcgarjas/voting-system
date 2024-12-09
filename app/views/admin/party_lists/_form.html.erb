@@ -1,30 +1,82 @@
-<h1 class="text-2xl font-bold mb-4"><%= action_name.capitalize %> Party List Position</h1>
+<div class="form-container">
+  <!-- Form Card -->
+  <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+    <!-- Form Header -->
+    <div class="px-6 py-4 border-b border-gray-200">
+      <div class="flex items-center justify-between">
+        <h1 class="text-xl font-semibold text-gray-900">
+          <%= action_name.capitalize %> Party List
+        </h1>
+        <%= link_to party_lists_path,
+                    class: "button-back" do %>
+          <%= image_tag 'admin/back-button.svg', class: 'w-4 h-4 mr-1.5' %>
+          Back
+        <% end %>
+      </div>
+    </div>
 
-<div class="mb-4">
-  <%= link_to 'Back to Lists', party_lists_path, class: 'inline-block px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+    <!-- Form Content -->
+    <div class="px-6 py-6">
+      <%= form_with model: @party_list,
+                    url: url,
+                    method: method,
+                    class: "space-y-6",
+                    data: { controller: "form", action: "turbo:submit-start->form#submitting" } do |form| %>
+
+        <!-- Party List Name -->
+        <div class="form-group" data-controller="input">
+          <%= form.label :name, class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <div class="relative rounded-md shadow-sm">
+            <%= form.text_field :name,
+                              class: "input-field",
+                              placeholder: "Enter party list name",
+                              data: {
+                                action: "input->input#validate",
+                                input_target: "field"
+                              } %>
+          </div>
+        </div>
+
+        <!-- Organization Selection -->
+        <div class="form-group" data-controller="input">
+          <%= form.label :organization_id, "Organization", class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <div class="relative rounded-md shadow-sm">
+            <%= form.collection_select :organization_id,
+                                    Organization.all,
+                                    :id,
+                                    :name,
+                                    { prompt: "Select organization" },
+                                    {
+                                      class: "input-field",
+                                      data: {
+                                        action: "input->input#validate",
+                                        input_target: "field"
+                                      }
+                                    } %>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group" data-controller="input">
+          <%= form.label :description, class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <div class="relative rounded-md shadow-sm">
+            <%= form.text_area :description,
+                             class: "input-field",
+                             rows: 4,
+                             placeholder: "Enter party list description",
+                             data: {
+                               action: "input->input#validate",
+                               input_target: "field"
+                             } %>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="flex justify-end space-x-4 mt-8">
+          <%= link_to 'Cancel', back_url, class: 'button-cancel' %>
+          <%= form.submit submit_text, class: "button-submit" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-<%= form_with model: @party_list, url: url, method: method, html: { class: 'w-full' } do |f| %>
-  <div class="mb-4">
-    <%= f.label :name, class: 'block text-sm font-medium text-gray-700' %>
-    <%= f.text_field :name, class: 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2' %>
-  </div>
-
-  <div class="mb-4">
-    <%= f.label :description, class: 'block text-sm font-medium text-gray-700' %>
-    <%= f.text_area :description,
-                    class: 'mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2',
-                    rows: 4,
-                    placeholder: 'Enter party list description' %>
-  </div>
-
-  <div class="mb-4">
-    <%= f.label :organization, class: 'block text-sm font-medium text-gray-700' %>
-    <%= f.collection_select :organization_id, Organization.all, :id, :name, { prompt: 'Select Organization' },
-                            { class: 'mt-1 mb-3 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2' } %>
-  </div>
-
-  <div>
-    <%= f.submit submit, class: 'w-full bg-blue-600 text-white py-2 text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500' %>
-  </div>
-<% end %>
