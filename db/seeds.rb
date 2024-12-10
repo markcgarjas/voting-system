@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+require 'faker'
 
+# Create admin user
 admin_user = User.find_or_initialize_by(
   email: 'admin1234@gmail.com',
   username: 'admin1234',
@@ -12,6 +14,23 @@ if admin_user.new_record?
 end
 
 puts "Seeded admin user: #{admin_user.username}"
+
+# Create 50 users
+50.times do
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  User.create!(
+    email: Faker::Internet.unique.email,
+    username: Faker::Internet.unique.username,
+    password: 'password123',
+    first_name: first_name,
+    last_name: last_name,
+    middle_name: Faker::Name.middle_name,
+    phone_number: Faker::PhoneNumber.phone_number,
+    address: Faker::Address.full_address,
+    role: :student
+  )
+end
 
 if User.student.empty?
   40.times do
@@ -28,22 +47,14 @@ end
 
 puts "Seeded #{User.count} student users."
 
-organizations = [
-  { name: 'University of Students Government', code: 'USG' },
-  { name: 'Science and Engineering Society', code: 'SES' },
-  { name: 'Business Leaders Association', code: 'BLA' },
-  { name: 'Environmental Awareness Club', code: 'EAC' },
-  { name: 'International Students Association', code: 'ISA' },
-  { name: 'Arts and Literature Society', code: 'ALS' },
-  { name: 'Sports and Recreation Council', code: 'SRC' },
-  { name: 'Technology and Innovation Club', code: 'TIC' },
-  { name: 'Community Outreach Program', code: 'COP' },
-  { name: 'Debate and Public Speaking Society', code: 'DPSS' },
-  { name: 'Health and Wellness Group', code: 'HWG' }
-]
-
-organizations.each do |org_attrs|
-  Organization.find_or_create_by(org_attrs)
+# Create 50 organizations
+50.times do |i|
+  name = "#{Faker::Company.unique.name} #{%w[Club Society Association Council Group].sample}"
+  code = "#{name.split.map(&:first).join.upcase} #{i}"
+  Organization.create!(
+    name: name,
+    code: code
+  )
 end
 
 puts "Seeded #{Organization.count} organizations."
@@ -97,16 +108,36 @@ end
 
 puts "Seeded #{officer_positions.count} positions created."
 
-10.times do
-  Member.find_or_create_by(user: User.student.sample, organization: Organization.all.sample, role: :member,
-                           officer_position: OfficerPosition.all.sample)
+# Create 50 members
+50.times do
+  Member.create!(
+    user: User.student.sample,
+    organization: Organization.all.sample,
+    role: %i[member candidate].sample,
+    officer_position: OfficerPosition.all.sample
+  )
 end
 
 puts "Seeded #{Member.count} members."
 
-10.times do
-  Election.find_or_create_by(name: "#{Faker::Educator.subject} Student Council Election", user: User.admin.sample,
-                             organization: Organization.all.sample)
+# Create 50 elections
+50.times do
+  Election.create!(
+    name: "#{Faker::Educator.subject} #{Faker::Company.buzzword} Election #{Time.current.year}",
+    user: User.admin.sample,
+    organization: Organization.all.sample
+  )
 end
 
 puts "Seeded #{Election.count} elections."
+
+# Create 50 party lists
+50.times do |i|
+  PartyList.create!(
+    name: Faker::Company.catch_phrase,
+    description: "#{Faker::Company.bs} #{i}",
+    organization: Organization.all.sample
+  )
+end
+
+puts "Seeded #{PartyList.count} party lists."
