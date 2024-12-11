@@ -1,39 +1,127 @@
-<div class="register-container">
-  <div class="register-content">
-    <div class="header">
-      <%= link_to 'Login', new_user_session_path, class: 'button login-button' %>
-      <%= link_to 'Register', new_user_registration_path, class: ' button register-button active' %>
+<div class="min-h-screen flex bg-gradient-to-br from-blue-50 to-indigo-100">
+  <!-- Left Banner Section -->
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-indigo-600 to-indigo-800 text-white p-12 flex-col justify-between relative overflow-hidden">
+    <!-- Decorative Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <svg class="w-full h-full" viewBox="0 0 100 100" fill="none">
+        <!-- Add subtle background pattern -->
+        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        </pattern>
+        <rect width="100" height="100" fill="url(#grid)"/>
+      </svg>
     </div>
-    <h2 class="header-title">Sign up</h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "signup-form") do |f| %>
-
-      <div class="form-group">
-        <%= f.label :email, class: "form-label" %>
-        <%= f.email_field :email, autofocus: true, class: "form-input" %>
+    <div class="space-y-8 relative z-10">
+      <!-- Brand Logo & Name -->
+      <div class="flex items-center space-x-3 transition-transform hover:transform hover:translate-x-2">
+        <svg class="w-12 h-12 filter drop-shadow-lg" viewBox="0 0 40 40" fill="none">
+          <path d="M20 0C8.95431 0 0 8.95431 0 20C0 31.0457 8.95431 40 20 40C31.0457 40 40 31.0457 40 20C40 8.95431 31.0457 0 20 0Z" fill="white"/>
+          <path d="M20 8L28 16H12L20 8Z" fill="#4F46E5"/>
+        </svg>
+        <span class="text-2xl font-bold tracking-tight">Digital Voting System</span>
       </div>
 
-      <div class="form-group">
-        <%= f.label :username, class: "form-label" %>
-        <%= f.text_field :username, autofocus: true, class: "form-input" %>
+      <!-- Hero Content -->
+      <div class="space-y-6 max-w-md">
+        <h1 class="text-5xl font-bold leading-tight tracking-tight">
+          Join Our Community
+        </h1>
+        <p class="text-xl text-indigo-100 leading-relaxed">
+          Create an account to participate in secure voting and make your voice heard.
+        </p>
       </div>
 
-      <div class="form-group">
-        <%= f.label :password, class: "form-label" %>
-        <% if @minimum_password_length %>
-          <em class="password-hint">(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %>
-        <%= f.password_field :password, class: "form-input" %>
+      <!-- Feature List with Enhanced Icons -->
+      <div class="space-y-6 mt-12">
+        <div class="flex items-center space-x-4 group">
+          <div class="p-2 bg-white/10 rounded-lg transition-colors group-hover:bg-white/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <span class="text-lg">Quick and easy registration</span>
+        </div>
+
+        <div class="flex items-center space-x-4 group">
+          <div class="p-2 bg-white/10 rounded-lg transition-colors group-hover:bg-white/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <span class="text-lg">Secure account protection</span>
+        </div>
+
+        <div class="flex items-center space-x-4 group">
+          <div class="p-2 bg-white/10 rounded-lg transition-colors group-hover:bg-white/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <span class="text-lg">Instant access to voting</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <div class="relative z-10">
+      <div class="text-sm text-indigo-200 flex items-center space-x-1">
+        <span>© <%= Time.current.year %> MCVG Company. All rights reserved.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Form Section -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+    <div class="w-full max-w-md bg-white rounded-xl shadow-2xl p-8 space-y-6">
+      <div class="flex justify-center space-x-4 mb-8">
+        <%= link_to 'Login', new_user_session_path,
+                    class: 'px-6 py-2 text-sm font-medium rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200' %>
+        <%= link_to 'Register', new_user_registration_path,
+                    class: 'px-6 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors duration-200' %>
       </div>
 
-      <div class="form-group">
-        <%= f.label :password_confirmation, class: "form-label" %>
-        <%= f.password_field :password_confirmation, class: "form-input" %>
-      </div>
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Sign up</h2>
 
-      <div class="form-actions">
-        <%= f.submit "Sign up", class: "submit-button" %>
-      </div>
-    <% end %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
+                   html: { class: "space-y-6" }) do |f| %>
+
+        <div class="space-y-2">
+          <%= f.label :email, class: 'block text-sm font-medium text-gray-700' %>
+          <%= f.email_field :email, autofocus: true,
+                            class: 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200',
+                            placeholder: 'Enter your email' %>
+        </div>
+
+        <div class="space-y-2">
+          <%= f.label :username, class: 'block text-sm font-medium text-gray-700' %>
+          <%= f.text_field :username,
+                           class: 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200',
+                           placeholder: 'Choose a username' %>
+        </div>
+
+        <div class="space-y-2">
+          <%= f.label :password, class: 'block text-sm font-medium text-gray-700' %>
+          <% if @minimum_password_length %>
+            <span class="text-xs text-gray-500">(<%= @minimum_password_length %> characters minimum)</span>
+          <% end %>
+          <%= f.password_field :password,
+                               class: 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200',
+                               placeholder: 'Create a password' %>
+        </div>
+
+        <div class="space-y-2">
+          <%= f.label :password_confirmation, class: 'block text-sm font-medium text-gray-700' %>
+          <%= f.password_field :password_confirmation,
+                               class: 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200',
+                               placeholder: 'Confirm your password' %>
+        </div>
+
+        <div class="pt-2">
+          <%= f.submit "Sign up",
+                       class: 'w-full py-3 px-4 border border-transparent rounded-lg text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
