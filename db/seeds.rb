@@ -141,3 +141,19 @@ puts "Seeded #{Election.count} elections."
 end
 
 puts "Seeded #{PartyList.count} party lists."
+
+# Create 50 candidates
+50.times do
+  Candidate.create!(
+    officer_position: OfficerPosition.all.sample,
+    party_list: PartyList.all.sample,
+    election: Election.all.sample,
+    name: Faker::Name.last_name,
+    label: Faker::Lorem.paragraph,
+    votes: Faker::Number.between(from: 1, to: 1000),
+    section: Faker::Name.first_name,
+    course: Faker::Name.last_name
+  )
+end
+
+puts "Seeded #{Candidate.count} candidates."
