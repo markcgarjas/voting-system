@@ -1,0 +1,81 @@
+<div class="form-container">
+  <!-- Form Card -->
+  <div class="form-card">
+    <!-- Form Header -->
+    <div class="form-card-header">
+      <div class="flex items-center justify-between">
+        <h1><%= action_name.capitalize %> Candidate</h1>
+        <%= link_to candidates_path, class: "button-back" do %>
+          <%= image_tag 'admin/back-button.svg', class: 'w-4 h-4 mr-1.5' %>
+          Back
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Form Content -->
+    <div class="px-6 py-6">
+      <%= form_with(model: @candidate, url: url, method: method, class: "space-y-6") do |f| %>
+        <div class="form-group">
+          <%= f.label :election_id, class: "form-label" %>
+          <div class="relative rounded-md shadow-sm">
+            <%= f.collection_select :election_id, Election.all, :id, :name,
+                                    { prompt: "Select Election" },
+                                    class: "input-field" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :officer_position_id, class: "form-label" %>
+          <div class="relative rounded-md shadow-sm">
+            <%= f.collection_select :officer_position_id, OfficerPosition.all, :id, :name,
+                                    { prompt: "Select Position" },
+                                    class: "input-field" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :party_list_id, class: "form-label" %>
+          <div class="relative rounded-md shadow-sm">
+            <%= f.collection_select :party_list_id, PartyList.all, :id, :name,
+                                    { prompt: "Select Party List" },
+                                    class: "input-field" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :name, class: "form-label" %>
+          <div class="relative rounded-md shadow-sm">
+            <%= f.text_field :name, class: "input-field" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :section, class: "form-label" %>
+          <div class="relative rounded-md shadow-sm">
+            <%= f.text_field :section, class: "input-field" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :course, class: "form-label" %>
+          <div class="relative rounded-md shadow-sm">
+            <%= f.text_field :course, class: "input-field" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :label, class: "form-label" %>
+          <div class="relative rounded-md shadow-sm">
+            <%= f.text_field :label, class: "input-field" %>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <%= link_to 'Cancel', back_url, class: 'button-cancel' %>
+          <%= f.submit submit_text, class: "button-submit" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

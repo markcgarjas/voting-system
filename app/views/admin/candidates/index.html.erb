@@ -1,0 +1,135 @@
+<div class="page-header">
+  <div>
+    <h1>Candidates</h1>
+    <p>Manage candidates and their configurations</p>
+  </div>
+
+  <%= link_to new_candidate_path, class: "primary-button" do %>
+    <%= image_tag 'admin/plus.svg', class: 'w-5 h-5 mr-2' %>
+    Add New Candidates
+  <% end %>
+</div>
+
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+  <div class="bg-white overflow-hidden shadow rounded-lg">
+    <div class="p-5">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <%= image_tag 'admin/candidate.svg', class: 'h-6 w-6 text-gray-400' %>
+        </div>
+        <div class="ml-5 w-0 flex-1">
+          <dl>
+            <dt class="text-sm font-medium text-gray-500 truncate">Total Candidates</dt>
+            <dd class="flex items-baseline">
+              <div class="text-2xl font-semibold text-gray-900"><%= @total_candidates %></div>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination -->
+<div class="mb-6">
+  <%= paginate @candidates, remote: true if @candidates.respond_to?(:total_pages) %>
+</div>
+
+<!-- Candidates List -->
+<div class="grid gap-6 mb-8">
+  <% @candidates.each do |candidate| %>
+    <div class="list-container">
+      <!-- Candidate Header -->
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
+                <span><%= candidate.name.first.upcase %></span>
+              </div>
+            </div>
+
+            <div>
+              <h2><%= "#{candidate.name} [#{candidate.serial_number}]" %></h2>
+              <p>Votes: <%= candidate.votes %></p>
+            </div>
+          </div>
+
+          <!-- Actions Dropdown -->
+          <div class="relative" data-controller="dropdown">
+            <button class="button-settings" data-action="click->dropdown#toggle">
+              <%= image_tag 'admin/setting.svg' %>
+            </button>
+
+            <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 hidden z-50" data-dropdown-target="dropdown">
+              <%= link_to edit_candidate_path(candidate),
+                          class: "dropdown-edit" do %>
+                <%= image_tag 'admin/edit.svg', class: 'w-4 h-4 mr-3 text-yellow-500' %>
+                Edit
+              <% end %>
+
+              <%= link_to candidate_path(candidate),
+                          data: { action: "click->sweet-alert#confirmDelete", turbo_method: :delete },
+                          class: "dropdown-delete" do %>
+                <%= image_tag 'admin/delete.svg', class: 'w-4 h-4 mr-3 text-red-500' %>
+                Delete
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Candidate Details Section -->
+      <div class="p-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6">
+          <div>
+            <h3>Officer Position</h3>
+            <p><%= candidate.officer_position.name %></p>
+          </div>
+          <div>
+            <h3>Party List</h3>
+            <p><%= candidate.party_list.name %></p>
+          </div>
+          <div>
+            <h3>Election</h3>
+            <p><%= candidate.election.name %></p>
+          </div>
+          <div>
+            <h3>Section</h3>
+            <p><%= candidate.section %></p>
+          </div>
+          <div>
+            <h3>Course</h3>
+            <p><%= candidate.course %></p>
+          </div>
+          <div>
+            <h3>Label</h3>
+            <p><%= candidate.label %></p>
+          </div>
+          <div>
+            <h3>Created</h3>
+            <p><%= candidate.created_at.strftime("%B %d, %Y") %></p>
+          </div>
+          <!-- Add more candidate details as needed -->
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<!-- Empty State -->
+<% if @candidates.empty? %>
+  <div class="text-center py-12 bg-white rounded-lg border-2 border-dashed border-gray-300">
+    <div class="flex flex-col items-center">
+      <%= image_tag 'admin/empty-state.svg', class: 'w-24 h-24 mb-4' %>
+      <h3 class="text-lg font-medium text-gray-900 mb-2">No Candidates Yet</h3>
+      <p class="text-gray-500 mb-4">Get started by creating your first candidate.</p>
+      <%= link_to new_candidate_path,
+                  class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700" do %>
+        <%= image_tag 'admin/plus.svg', class: 'w-5 h-5 mr-2' %>
+        Add Candidate
+      <% end %>
+    </div>
+  </div>
+<% end %>
