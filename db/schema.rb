@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_241_127_090_343) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_11_023921) do
+  create_table 'candidates', charset: 'utf8mb4', force: :cascade do |t|
+    t.bigint 'officer_position_id'
+    t.bigint 'party_list_id'
+    t.bigint 'election_id'
+    t.string 'serial_number'
+    t.string 'name'
+    t.string 'section'
+    t.string 'course'
+    t.string 'label'
+    t.integer 'votes', default: 0
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['election_id'], name: 'index_candidates_on_election_id'
+    t.index ['officer_position_id'], name: 'index_candidates_on_officer_position_id'
+    t.index ['party_list_id'], name: 'index_candidates_on_party_list_id'
+  end
+
   create_table 'elections', charset: 'utf8mb4', force: :cascade do |t|
     t.bigint 'organization_id'
     t.bigint 'user_id'
@@ -82,4 +97,8 @@ ActiveRecord::Schema[7.0].define(version: 20_241_127_090_343) do
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
+
+  add_foreign_key 'candidates', 'elections'
+  add_foreign_key 'candidates', 'officer_positions'
+  add_foreign_key 'candidates', 'party_lists'
 end
