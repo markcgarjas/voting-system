@@ -7,7 +7,7 @@
 
     <%= form_with model: resource, scope: resource_name, url: admin_user_session_path, html: { class: 'space-y-6' } do |f| %>
       <div>
-        <%= f.label :username, class: 'block text-sm font-medium text-gray-700 mb-2' %>
+        <%= f.label :username, class: 'form-label' %>
         <div class="relative">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <%= image_tag 'admin/login/person.svg', class: 'h-5 w-5' %>
@@ -20,8 +20,8 @@
       </div>
 
       <div>
-        <div class="flex items-center justify-between mb-2">
-          <%= f.label :password, class: 'block text-sm font-medium text-gray-700' %>
+        <div class="page-header">
+          <%= f.label :password, class: 'form-label' %>
           <a href="#" class="text-sm text-blue-600 hover:text-blue-500">Forgot password?</a>
         </div>
         <div class="relative">

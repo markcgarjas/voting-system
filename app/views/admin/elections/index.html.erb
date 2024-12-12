@@ -42,16 +42,16 @@
     <div class="list-container">
       <!-- Election Header -->
       <div class="p-6 border-b border-gray-200">
-        <div class="flex items-center justify-between">
+        <div class="page-header">
           <div class="flex items-center space-x-4">
             <div class="flex-shrink-0">
               <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
-                <span class="text-xl font-bold text-blue-600"><%= election.name.first.upcase %></span>
+                <span><%= election.name.first.upcase %></span>
               </div>
             </div>
 
             <div>
-              <h2 class="text-lg font-medium text-gray-900"><%= election.name %></h2>
+              <h2><%= election.name %></h2>
               <p class="text-sm text-gray-500">
                 <%= election.organization.name %>
               </p>
@@ -66,14 +66,14 @@
 
             <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 hidden z-50" data-dropdown-target="dropdown">
               <%= link_to edit_election_path(election),
-                          class: "flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 rounded-t-lg transition duration-150 ease-in-out" do %>
+                          class: "dropdown-edit" do %>
                 <%= image_tag 'admin/edit.svg', class: 'w-4 h-4 mr-3 text-yellow-500' %>
                 Edit
               <% end %>
 
               <%= link_to election_path(election),
                           data: { action: "click->sweet-alert#confirmDelete", turbo_method: :delete },
-                          class: "flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-b-lg transition duration-150 ease-in-out" do %>
+                          class: "dropdown-edit" do %>
                 <%= image_tag 'admin/delete.svg', class: 'w-4 h-4 mr-3 text-red-500' %>
                 Delete
               <% end %>
@@ -86,14 +86,14 @@
       <div class="p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h3 class="text-sm font-medium text-gray-500 mb-1">Status</h3>
-            <p class="text-base text-gray-900">
+            <h3>Status</h3>
+            <p>
               Started
             </p>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-gray-500 mb-1">Created</h3>
-            <p class="text-base text-gray-900">
+            <h3>Created</h3>
+            <p>
               <%= election.created_at.strftime("%B %d, %Y") %>
             </p>
           </div>
@@ -109,7 +109,7 @@
   <div class="text-center py-12 bg-white rounded-lg border-2 border-dashed border-gray-300">
     <div class="flex flex-col items-center">
       <%= image_tag 'admin/empty-state.svg', class: 'w-24 h-24 mb-4' %>
-      <h3 class="text-lg font-medium text-gray-900 mb-2">No Elections Yet</h3>
+      <h3>No Elections Yet</h3>
       <p class="text-gray-500 mb-4">Get started by creating your first election.</p>
       <%= link_to new_election_path,
                   class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700" do %>

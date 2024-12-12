@@ -25,11 +25,11 @@ svg {
 }
 
 h1 {
-  @apply text-2xl font-bold text-gray-900;
+  @apply text-2xl font-bold text-gray-900 mb-1;
 }
 
 h2 {
-  @apply text-lg font-medium text-gray-900;
+  @apply text-lg font-medium text-gray-900 mb-1;
 }
 
 h3 {
@@ -41,7 +41,7 @@ p {
 }
 
 span {
-  @apply text-xl font-bold;
+  @apply text-base font-normal;
 }
 
 .page-container {
@@ -69,7 +69,7 @@ span {
 }
 
 .form-container {
-  @apply max-w-4xl mx-auto;
+  @apply max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md;
 }
 
 .form-card {

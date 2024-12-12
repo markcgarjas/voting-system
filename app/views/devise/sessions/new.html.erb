@@ -87,14 +87,14 @@
           html: { class: "space-y-6" }) do |f| %>
 
         <div class="space-y-2">
-          <%= f.label :username, class: 'block text-sm font-medium text-gray-700' %>
+          <%= f.label :username, class: 'form-label' %>
           <%= f.text_field :username, autofocus: true,
               class: 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200',
               placeholder: 'Enter your username' %>
         </div>
 
         <div class="space-y-2">
-          <%= f.label :password, class: 'block text-sm font-medium text-gray-700' %>
+          <%= f.label :password, class: 'form-label' %>
           <%= f.password_field :password,
               class: 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200',
               placeholder: '••••••••' %>
