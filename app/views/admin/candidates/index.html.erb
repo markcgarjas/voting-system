@@ -42,7 +42,7 @@
     <div class="list-container">
       <!-- Candidate Header -->
       <div class="p-6 border-b border-gray-200">
-        <div class="flex items-center justify-between">
+        <div class="page-header">
           <div class="flex items-center space-x-4">
             <div class="flex-shrink-0">
               <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
@@ -123,7 +123,7 @@
   <div class="text-center py-12 bg-white rounded-lg border-2 border-dashed border-gray-300">
     <div class="flex flex-col items-center">
       <%= image_tag 'admin/empty-state.svg', class: 'w-24 h-24 mb-4' %>
-      <h3 class="text-lg font-medium text-gray-900 mb-2">No Candidates Yet</h3>
+      <h3>No Candidates Yet</h3>
       <p class="text-gray-500 mb-4">Get started by creating your first candidate.</p>
       <%= link_to new_candidate_path,
                   class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700" do %>

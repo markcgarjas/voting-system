@@ -2,7 +2,7 @@
   <% cache [:sidebar_page, current_admin_user.present?.to_s] do %>
     <div id="sidebar" class="w-64 min-h-screen fixed left-0 top-0 z-40 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white flex flex-col shadow-xl transition-all duration-300 ease-in-out display-sidebar">
       <%= link_to admin_root_path, class: 'p-6 text-center font-bold text-xl border-b border-gray-700/50 bg-gray-800/50 hover:bg-gray-700 transition-all duration-300 flex items-center justify-center gap-2' do %>
-        <span class="text-blue-400">Admin Dashboard</span>
+        <span>Admin Dashboard</span>
       <% end %>
 
       <nav class="flex-1 p-4 space-y-4 overflow-y-auto sidebar-scrollbar">

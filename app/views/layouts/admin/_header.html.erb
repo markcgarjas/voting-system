@@ -5,15 +5,6 @@
         <button class="lg:hidden text-white hover:text-blue-400 transition-colors duration-300" data-action="click->sidebar#toggle">
           <%= image_tag 'admin/hamburger-icon.svg', class: 'w-6 h-6' %>
         </button>
-
-        <div class="flex items-center space-x-3">
-          <h1 class="text-xl font-semibold text-white">
-            <span class="text-blue-400">Home</span>
-          </h1>
-          <span class="text-gray-400 text-sm hidden sm:inline-block">
-          / <%= controller_name.titleize unless controller_name == 'home' %>
-        </span>
-        </div>
       </div>
 
       <div class="flex items-center space-x-4">

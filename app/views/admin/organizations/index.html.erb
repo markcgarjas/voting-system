@@ -44,11 +44,11 @@
     <div class="list-container">
       <!-- Organization Header -->
       <div class="p-6 border-b border-gray-200">
-        <div class="flex items-center justify-between">
+        <div class="page-header">
           <div class="flex items-center space-x-4">
             <div class="flex-shrink-0">
               <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
-                <span class="text-xl font-bold text-blue-600"><%= organization.name.first.upcase %></span>
+                <span><%= organization.name.first.upcase %></span>
               </div>
             </div>
 
@@ -68,7 +68,7 @@
             <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 hidden z-50"
                  data-dropdown-target="dropdown">
               <%= link_to edit_organization_path(organization),
-                          class: "flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 rounded-t-lg transition duration-150 ease-in-out" do %>
+                          class: "dropdown-editt" do %>
                 <%= image_tag 'admin/edit.svg', class: 'w-4 h-4 mr-3 text-yellow-500' %>
                 Edit
               <% end %>
@@ -78,7 +78,7 @@
                             action: "click->sweet-alert#confirmDelete",
                             turbo_method: :delete
                           },
-                          class: "flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-b-lg transition duration-150 ease-in-out" do %>
+                          class: "dropdown-delete" do %>
                 <%= image_tag 'admin/delete.svg', class: 'w-4 h-4 mr-3 text-red-500' %>
                 Delete
               <% end %>
@@ -89,8 +89,8 @@
 
       <!-- Members Section -->
       <div class="p-6">
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-lg font-medium text-gray-900">Members</h3>
+        <div class="page-header">
+          <h3>Members</h3>
           <%= link_to new_organization_member_path(organization),
                       class: "inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-lg text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" do %>
             <%= image_tag 'admin/add-people.svg', class: "w-5 h-5 mr-1.5" %>
@@ -104,7 +104,7 @@
             <tr class="bg-gray-50">
               <th scope="col" class="px-6 py-3 text-center">
                 <div class="flex items-center space-x-2">
-                  <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Member</span>
+                  <span>Member</span>
                   <button class="text-gray-400 hover:text-gray-500" data-action="click->table-actions#sort" data-field="member">
                     <%= image_tag 'admin/sort.svg', class: 'h-4 w-4' %>
                   </button>
@@ -112,17 +112,17 @@
               </th>
               <th scope="col" class="px-6 py-3 text-center">
                 <div class="flex items-center space-x-2">
-                  <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Position</span>
+                  <span>Position</span>
                   <button class="text-gray-400 hover:text-gray-500" data-action="click->table-actions#sort" data-field="position">
                     <%= image_tag 'admin/sort.svg', class: 'h-4 w-4' %>
                   </button>
                 </div>
               </th>
               <th scope="col" class="px-6 py-3 text-center">
-                <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Vote Count</span>
+                <span>Vote Count</span>
               </th>
               <th scope="col" class="px-6 py-3 text-center">
-                <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</span>
+                <span>Actions</span>
               </th>
             </tr>
             </thead>
@@ -139,7 +139,7 @@
                         <%#= image_tag member.user.avatar, class: "h-10 w-10 rounded-full object-cover" %>
                       <% else %>
                         <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
-                              <span class="text-white font-medium text-sm">
+                              <span>
                                 <%= member.user.username.first(2).upcase %>
                               </span>
                         </div>
@@ -161,7 +161,7 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                  <span class="bg-gray-100 text-gray-800 p-2 inline-flex text-lg leading-5 font-semibold rounded-full">
+                  <span>
                     55
                   </span>
                 </td>
@@ -202,7 +202,7 @@
 
                 <!-- Empty State Message -->
                 <div class="space-y-3">
-                  <h3 class="text-lg font-medium text-gray-900">No Members Yet</h3>
+                  <h3>No Members Yet</h3>
                   <p class="text-gray-500 max-w-sm mx-auto">
                     Get started by adding members to this organization. Members can be assigned different roles and
                     responsibilities.
